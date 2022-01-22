@@ -1,4 +1,4 @@
-package com.ourstore.model;
+package com.ourstore.dao.address;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

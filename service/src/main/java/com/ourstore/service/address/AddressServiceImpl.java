@@ -3,6 +3,7 @@ package com.ourstore.service.address;
 import com.ourstore.dao.address.AddressRepository;
 import com.ourstore.dao.exceptions.AddressException;
 import com.ourstore.model.address.Address;
+import com.ourstore.model.customer.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ public class AddressServiceImpl implements AddressService{
     @Autowired
     AddressRepository addressRepository;
 
+    Customer customer = new Customer();
+
     @Override
     public void saveAddress(Address address) {
         addressRepository.save(address);
@@ -21,11 +24,10 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public void updateAddress(Address address) throws AddressException{
-        if (address.getId() == null){
-            throw new AddressException("Address id cannot be null");
+       Address address1 = addressRepository.findById(address.getId()).orElse(null);
 
-
-            Address address1 = addressRepository.findById(address.getId()).orElse(null);
+//        if (address.getId() == null){
+//            throw new AddressException("Address id cannot be null");
 
 
             if(address1 == null){
@@ -46,7 +48,8 @@ public class AddressServiceImpl implements AddressService{
                 addressRepository.saveAddress(address1);
             }
         }
-    }
+
+
 
     @Override
     public Address findAddressById(Integer id) {
